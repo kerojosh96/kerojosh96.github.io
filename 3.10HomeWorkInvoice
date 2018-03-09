@@ -1,0 +1,120 @@
+class Invoice
+{
+public:
+    Invoice(std::string PartSku,std::string Partdescr,int PartQuant,int PartPr,double SalesTax,double Discount)
+        :PartNumber(PartSku),PartDescript(Partdescr),PartQuantity(PartQuant),PartPrice(PartPr),Tax(0.2),discount(Discount) {}
+
+    double getInvoiceAmount()
+    {
+
+        double turnValue;
+        turnValue = PartQuantity * PartPrice;
+        turnValue = turnValue +(Tax*turnValue);
+        turnValue = turnValue - (discount*turnValue);
+        return turnValue;
+    }
+
+    std::string getPartNumber()
+    {
+
+        return PartNumber;
+    }
+    std::string getDescript()
+    {
+        return PartDescript;
+    }
+    int getPartQuant()
+    {
+        return PartQuantity;
+    }
+
+    int getPartPrice()
+    {
+        return PartPrice;
+    }
+
+    double getTax()
+    {
+        return Tax;
+    }
+    double getDiscount()
+    {
+
+        return discount;
+
+    }
+
+    std::string setPartNumber(std::string a)
+    {
+
+        PartNumber = a;
+        return PartNumber;
+
+    }
+
+
+    std::string setDescript(std::string b)
+    {
+
+        PartDescript = b;
+        return PartNumber;
+
+    }
+
+
+    int setQuantity(int a)
+    {
+        if(a>=0)
+        {
+            PartQuantity =a;
+
+        }
+        return PartQuantity;
+    }
+
+    int setPrice(int a )
+    {
+        if(a>=0)
+        {
+            PartPrice = a;
+
+        }
+
+        return PartPrice;
+    }
+    double setTax(double a)
+    {
+        if(a>=0)
+        {
+
+            Tax = a;
+        }
+
+        return Tax;
+
+    }
+    double setDiscount(double a)
+    {
+        if(a>=0)
+        {
+
+            discount = a;
+
+        }
+        return discount;
+
+    }
+
+private:
+
+    std::string PartNumber;
+    std::string PartDescript;
+    int PartQuantity;
+    int PartPrice;
+    double Tax;
+    double discount;
+
+};
+
+
+
