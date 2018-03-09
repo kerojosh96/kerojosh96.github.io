@@ -9,6 +9,6 @@ int main()
     cout<< testy.displayDate()<<endl;
     cout << testy2.displayDate();
     cout << " the year has been changed to " << testy.setyear(2017)<<endl;
-    cout << "the new year is "<<testy.getYear()<<"(" <<testy.displayDate();
+    cout << "the new year is "<<testy.getYear()<<" (" <<testy.displayDate() <<")";
 
 }
