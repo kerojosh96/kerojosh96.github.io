@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int recursiveMax(const vector <int>& nums,int minVal,int maxVal)
+{
+    int CurrentHi{0};
+    vector <int> hold{};
+
+    for(int x = minVal; x < maxVal; ++x)
+    {
+
+        if (CurrentHi < nums[x])
+        {
+            CurrentHi = nums[x];
+
+        }
+    }
+    return CurrentHi;
+}
+int main()
+{
+    cout <<"the input vector is test {1,36,35,56,67,324}"<<endl;
+    vector <int> test {1,36,35,56,67,324};
+    cout<<"max value within the range is "<< recursiveMax(test,2,4);
+    //cout << "Hello world!" << endl;
+    return 0;
+}
