@@ -1,0 +1,115 @@
+ #include <iostream>
+ using namespace std;
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
+ 
+ 
+ 
+const int RACE_END{70};
+void moveTort(int* const);
+void moveHare(int* const);
+void printPosition(const int*, const int* const);
+ 
+int main()
+{
+        int tort = 1, hare = 1, timer = 0;
+    srand(time(0));
+    cout <<"ON YOUR MARK, GET SET\n BANG!!!" << "\nAND THEY'RE OFF!!! \n";
+   
+    while (tort !=RACE_END && hare != RACE_END ) {
+   
+        moveTort(&tort);
+        moveHare(&hare);
+        printPosition(&tort,&hare);
+        ++timer;
+    }
+   
+   
+     cout << "\nTime Elapsed = " << timer << " seconds" << endl;
+     
+     
+   
+   
+    return 0;
+}
+ 
+void moveTort(int* const tortPtr) {
+    int x= 1 + rand() %10;
+    if (x >= 1 && x <= 5) {// fast plod
+        *tortPtr += 3;
+    }else {
+        if (x==6||x==7) { //slip
+            *tortPtr -=6;
+        }
+    }
+    if (x >=8 && x <=10) { //slow plod
+        *tortPtr += 1;
+    } else {
+        if (*tortPtr > RACE_END) { //check if won
+            *tortPtr = RACE_END;
+        }
+       
+    }
+}
+ 
+ 
+void moveHare(int* const harePtr) {
+    int y = 1 +rand() %10;
+    if (y==3 || y ==4) {
+        *harePtr +=9;//big hop
+    }else {
+        if (y==5) {
+            *harePtr -=12;//big slip
+        } else {
+            if (y>=6 && y<=8) {
+                ++(*harePtr);
+            }
+            else {
+                if ( y> 8) {
+                    *harePtr -=2;//
+                }
+                else {
+                    if ( *harePtr > RACE_END) {
+                        *harePtr = RACE_END;
+                    }
+                }
+            }
+        }
+    }
+}
+ 
+ 
+ 
+void printPosition (const int * const turtPtr, const int * const rabPtr) {
+   
+    if (*rabPtr == *turtPtr ) {
+        cout << setw(*rabPtr) << "OUCH!!!";
+    }
+        if ( *rabPtr < *turtPtr) {
+            cout << setw(*rabPtr) << 'H'
+            << setw(*turtPtr) << 'T';
+        }
+         
+         
+        if (*rabPtr > *turtPtr)
+        {
+           
+            cout << setw(*turtPtr) <<"T"
+                <<setw(*rabPtr) << "H";
+           
+        }
+       
+       
+    if (*rabPtr == RACE_END){
+        cout << "\nRabbit wins";
+    }
+    if (*turtPtr == RACE_END) {
+        cout << "\nTortoise wins";
+    }
+    if ( *rabPtr == RACE_END && *turtPtr == RACE_END)
+    {
+        cout << "\nehh...looks like tortoise won";
+    }
+   
+}
