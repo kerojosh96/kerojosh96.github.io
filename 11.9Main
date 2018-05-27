@@ -1,0 +1,126 @@
+#include <iostream>
+#include<string>
+ 
+using namespace std;
+class Package{// base class
+ 
+public:
+    int test;
+Package(string Name,string adress,string city,string state,int zip,double WeightInOunce,double RatePerOunce)
+{
+ 
+    this-> Name = Name;
+    this-> adress = adress;
+    this-> city = city;
+    this-> state = state;
+    this-> zip = zip;
+    this-> WeightInOunce = WeightInOunce;
+    this-> RatePerOunce = RatePerOunce;
+    TotalCost = WeightInOunce * RatePerOunce;
+     Shippinginfo = "Name : " + Name + "\nAdress :" + adress + "\nCity : "+ city + "\nstate : " + state + "\nzip : " + to_string(zip)  +"\nweight : "  + to_string(WeightInOunce);
+     PriceInfo = "\nRatePerOunce :" +to_string(RatePerOunce)+ "\nTotal Price: " + to_string(CalculateCost());
+}
+ 
+string returnName(){
+ 
+return Name;
+ 
+}
+ 
+ double CalculateCost()
+ {
+     
+   
+     return TotalCost;
+ }
+   
+   
+    string Displayinfo(){
+        return Shippinginfo + PriceInfo;
+    }
+   
+    string Shippinginfo;
+    string PriceInfo;
+   
+protected:
+ 
+string Name;
+string adress;
+string city;
+string state;
+ 
+int zip;
+int c = 0;
+double WeightInOunce;
+double RatePerOunce;
+double TotalCost;
+};
+ 
+ 
+class TwoDayPackage: public Package{//is a derived class from Package
+public:
+    TwoDayPackage(string Name,string adress,string city,string state,int zip, double weight,double rate,double FlatFee )
+        : Package(Name,adress,city,state,zip,weight,rate)
+    {
+        this-> FlatFee = FlatFee;
+         PriceInfo = "\nRatePerOunce :" +to_string(RatePerOunce)+ "\nFlat Fee : $" + to_string(FlatFee) + "\nTotal Price: $" + to_string(CalculateCost()) ;
+    }
+   
+    double CalculateCost(){
+        double a;
+          a = TotalCost + FlatFee;
+        return a;
+    }
+ 
+ 
+protected:
+ 
+    double FlatFee;
+ 
+};
+class OverNightPackage : public Package{
+public:
+    OverNightPackage(string Name,string adress,string city,string state,int zip,double WeightInOunce,double RatePerOunce,double addedAmount)
+        : Package(Name, adress, city, state, zip, WeightInOunce, RatePerOunce)
+    {
+            this-> addedAmount = addedAmount;
+            PriceInfo = "\nRatePerOunce(all included) : " +to_string((RatePerOunce+addedAmount)) + "\nTotal Price: $" + to_string(CalculateCost()) ;
+    }
+   
+    double CalculateCost() {
+        int x;
+        x = (RatePerOunce+addedAmount)*WeightInOunce;
+        return x;
+    }
+   
+protected:
+    double addedAmount;
+   
+   
+ 
+};
+ 
+ 
+int main()
+{
+ 
+   
+ 
+     
+    Package a("Josh","1234 Billbord ave","Redmond","OR",97756,12,0.5);
+   TwoDayPackage b ("Josh","1235 BillBord Ave","Redmond","OR",97756,12,0.5,2);
+   OverNightPackage c ("Josh","1235 BillBord Ave","Redmond","OR",97756,12,0.5,1);
+     
+    cout << a.Displayinfo()<<endl;
+    cout << "$" + to_string(a.CalculateCost())<<endl;
+    cout<<"  " <<endl;
+    cout <<b.Displayinfo()<<endl;
+    cout << "$" + to_string(b.CalculateCost())<<endl;
+    cout << "  " <<endl;
+    cout <<c.Displayinfo()<<endl;
+    cout << "$" + to_string(c.CalculateCost())<<endl;
+   
+   
+   
+    return 0;
+}
