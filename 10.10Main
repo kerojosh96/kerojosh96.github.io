@@ -1,0 +1,109 @@
+#include <iostream>
+#include <stdexcept>
+#include <cstdlib>
+#include <string>
+//Josh Cook
+using namespace std;
+
+class RatNum {
+public:
+    RatNum(int n = 0, int d = 1) {
+        N = n;
+        D = d;
+        //reduction();
+    }
+  
+    RatNum operator+ (const RatNum &a) { //Addition
+        RatNum sum;
+        sum.N = N * a.D + D * a.N;
+        sum.D = D * a.D;
+       // sum.reduction();
+        return sum;
+        
+    }
+    RatNum operator- (const RatNum &s) { //Subtraction
+        RatNum sub;
+        sub.N = N * s.D - D * s.N;
+        sub.D = D * s.D;
+       // sub.reduction();
+        return sub;
+    }
+    RatNum operator* (const RatNum &m) { //Multiplication
+        RatNum multiply;
+        multiply.N = N * m.N;
+        multiply.D = D * m.D;
+       // multiply.reduction();
+        return multiply;
+    }
+    RatNum operator/ ( RatNum &d) { //Division
+        RatNum divide;
+        if (d.N != 0) {
+            divide.N = N * d.D;
+            divide.D = D * d.N;
+           // divide.reduction();
+            
+        } else {
+            std::cout << "ERROR: CAN'T DIVIDE BY ZERO" << std::endl;
+            exit(1);
+        }
+        return divide;
+    }
+    
+    bool operator== (RatNum &e) {
+        if ( e.N == N && e.D == D) {
+            return true;
+        }
+        else return false;
+    }
+    
+    
+    
+    void reduction() {   //setter function 
+        int  gcd;
+        for(int i=1;i<=N&&i<=D;i++){
+        
+            if(N%i==0 && D%i == 0 ) 
+       {
+            
+             gcd=i;
+       
+        }
+        
+    }
+    N = N/gcd;
+    D = D/gcd;
+       
+   
+}
+     
+    string toString(){
+        string x;
+        x = to_string(N) + "/" + to_string(D);
+        
+        return x;
+    }
+private:
+    int N;
+    int D;
+  
+};
+
+int main() {
+    
+    RatNum RN1{4, 99}; 
+    RatNum RN2{342, 105};
+    RatNum RN3{0,0};
+    cout << "RatNum RN1 / RatNum RN2 = ";
+    RN3 = RN1/RN2;
+    RN3.reduction();
+    cout<<RN3.toString();
+  
+    cout << "\nRatNum RN1 + RatNum RN2 = ";
+    RN3 = RN1+RN2;
+    RN3.reduction();
+    cout<<RN3.toString();
+  
+    return 0;
+    
+    
+}
