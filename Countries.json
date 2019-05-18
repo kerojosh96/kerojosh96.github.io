@@ -1,0 +1,16 @@
+
+    {
+        country: "India",
+        notation: "Rs",
+        currency: "Rupees",
+        commission:"0.02",
+        multiplier:"65"
+    },
+    {
+        country: "Thailand",
+        notation: "thb",
+        currency: "Baht",
+        commission:"0.02",
+        multiplier:"35.5"
+    }
+    ]
